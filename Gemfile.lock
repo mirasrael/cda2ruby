@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/Empact/roxml.git
+  revision: 076f78c5481bbc08d54f0bd9424fd83ab8eda540
+  specs:
+    roxml (3.3.1)
+      activesupport (>= 2.3.0)
+      nokogiri (>= 1.3.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -14,3 +22,4 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   nokogiri
+  roxml!

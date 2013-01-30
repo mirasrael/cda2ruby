@@ -1,0 +1,9 @@
+class <%= @cls.name %><%= " < #{@cls.parent_class}" if @cls.parent_class %>
+    include ROXML
+
+    xml_convention &:camelcase
+
+<% @cls.attributes.each do |attr| %>
+    xml_accessor :<%= attr.name %>
+<% end %>
+end

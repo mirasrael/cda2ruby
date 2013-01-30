@@ -1,5 +1,6 @@
 require 'active_support/core_ext/string/inflections'
 require 'fileutils'
+require 'erb'
 
 class PaddedOutput
   def initialize(output)
@@ -42,6 +43,7 @@ module Mif
       @output_dir = File.expand_path("../../../generated/#{document.namespace}", __FILE__)
       @root_module = document.root_module_name
       @document = document
+      @template = ERB.new(File.read(File.expand_path('../../templates/class.rb.erb', __FILE__)))
     end
 
     def generate
@@ -63,15 +65,8 @@ module Mif
     end
 
     def generate_class(out, cls)
-      out.print "class #{cls.name}"
-      out.print " < #{cls.parent_class}" if cls.parent_class
-      out.puts
-      out.with_padding do
-        cls.attributes.each do |attr|
-          out.puts "attr_accessor :#{attr.name}"
-        end
-      end
-      out.puts "end"
+      @cls = cls
+      out.print @template.result(binding)
     end
   end
 end
