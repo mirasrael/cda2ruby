@@ -38,10 +38,9 @@ module Mif
   class Generator
     attr_reader :document
 
-    def initialize(document, opts = {})
-      namespace = opts[:namespace] || '.'
-      @output_dir = File.expand_path("../../../generated/#{namespace}", __FILE__)
-      @root_module = namespace.camelcase if namespace
+    def initialize(document)
+      @output_dir = File.expand_path("../../../generated/#{document.namespace}", __FILE__)
+      @root_module = document.root_module_name
       @document = document
     end
 
